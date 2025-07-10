@@ -54,3 +54,32 @@ body{
     width: 80%;
     height: 62%;
 }
+
+.row
+{
+    border: 1px solid rgb(167, 74, 74);
+
+    width: 99.5%;
+    height: 19.2%;
+
+    display: flex;
+}
+
+.row div
+{
+    background-color: rgb(153, 185, 178);
+    border: 1px solid black;
+
+    width: 25%;
+
+    display: flex;
+   
+    justify-content: center;
+    align-items: center;
+}
+
+.row .first-child
+{
+    /* flex: 2 1 auto; */
+    width: 76%;
+}
