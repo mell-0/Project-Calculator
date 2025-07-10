@@ -72,8 +72,16 @@ console.log(operate('/', -a, b));
 // trying to make buttons onclick
 let calc = document.querySelector('.calculator');
 
+// making the output screen interactable
+let output = document.querySelector('.output');
+
 calc.addEventListener('click', (e) => 
 {
     console.log(e.target.innerText);
+    output.textContent = e.target.innerText;
 });
+
+
+
+
 
