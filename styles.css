@@ -69,6 +69,7 @@ body{
 {
     background-color: rgb(153, 185, 178);
     border: 1px solid black;
+    border-radius: 8px;
 
     width: 25%;
 

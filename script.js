@@ -67,3 +67,13 @@ console.log(operate('*', -a, b));
 // console.log(divide(-a, b)); // -2
 console.log('\n' + operate('/', a, b));
 console.log(operate('/', -a, b));
+
+
+// trying to make buttons onclick
+let calc = document.querySelector('.calculator');
+
+calc.addEventListener('click', (e) => 
+{
+    console.log(e.target.innerText);
+});
+
