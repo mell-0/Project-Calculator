@@ -1,0 +1,56 @@
+/* html, body{
+    height: 100%; /* need this so the browser assigning full viewport height to html 
+*/
+
+body{
+    background-color: rgb(130, 143, 139);
+
+    /* "100% of the viewport height," no matter what the parent is, need for align-items */
+    height: 100vh;  
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.calculator
+{
+    border: 2px solid black;
+
+    width: 300px;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.outputScreen
+{
+    border: 1px solid black;
+
+    width: 80%;
+    height: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.output
+{
+    font-size: 32px;
+
+    margin-right: 5%;
+}
+
+.inputs
+{
+    border: 1px solid black;
+
+    width: 80%;
+    height: 62%;
+}
