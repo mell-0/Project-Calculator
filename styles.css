@@ -82,5 +82,5 @@ body{
 .row .first-child
 {
     /* flex: 2 1 auto; */
-    width: 76%;
+    width: 50%;
 }
