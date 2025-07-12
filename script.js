@@ -24,11 +24,11 @@ function divide(a, b)
 
 function operate(operator, a, b)
 {
-    console.log(`hi from operator ${operator} ${a} ${b}`);
+    //console.log(`hi from operator ${operator} ${a} ${b}`);
     switch (operator)
     {
         case '+':
-            console.log('hi from +');
+            //console.log('hi from +');
         return add(a, b);
 
         case '-':
@@ -38,9 +38,31 @@ function operate(operator, a, b)
         return multiply(a, b);
 
         case '/':
-        return divide(a, b);
+            if (b === 0)
+                alert("Can't divide by 0");
+            else
+                return divide(a, b);
     }
 };
+
+
+// displays results when equals button is clicked
+function equalsToBtn()
+{
+    num2 = output.textContent;
+
+    let result = operate(operater, Number(num1) , Number(num2));
+
+    // only round if it's not decimal & if answer is more than 11 in len, & only rounds when operate went through
+    if ((result !== undefined) && (result.toString().length > 11) && (result % 1 !== 0)) // only round if decimal
+    {
+        result = result.toFixed(11);
+    }
+        
+    console.log(`num1: ${num1}, num2: ${num2}, operator: ${operater}, = ` + result);
+
+    output.textContent = result;
+}
 
 
 let a = 6;
@@ -101,15 +123,19 @@ calc.addEventListener('click', (e) =>
         if (output.textContent === '0') 
         {
             if (str === '.') // keep 0 if first input is a decimal
-               newStr = output.textContent + str; 
+            {
+                newStr = output.textContent + str; 
+            }
             else
                 newStr = str; // replace 0 with number
         }
         else
         {
-        
             console.log(str + " a number");
             
+            if (str === '.') // adding a 0 if there is non when using decimal
+                output.textContent = '0';
+
             newStr = output.textContent + str; // adds the number to the end
         }
         
@@ -122,23 +148,38 @@ calc.addEventListener('click', (e) =>
         console.log(str);
 
         if (str === 'Clear') // maybe put clear, equal, & pos/neg into a switch statement
+        {
             output.textContent = '0';
+            num1 = 0;
+            num2 = 0;
+            operater = undefined;
+        }
         else
         {
             if (operaters.includes(str)) // if input was an operator
             {
                 console.log('this is an operator');
 
-                num1 = Number(output.textContent);
+                num1 = output.textContent;
                 operater = str;
+
                 //console.log('prev num: ' + num1);
                 output.textContent = '';
             }
             else if (str === '=')
             {
-                num2 = Number(output.textContent);
-                let result = operate(operater, num1 , num2);
+                num2 = output.textContent;
+
+                let result = operate(operater, Number(num1) , Number(num2));
+
+                // only round if it's not decimal & if answer is more than 11 in len, & only rounds when operate went through
+                if ((result !== undefined) && (result.toString().length > 11) && (result % 1 !== 0)) // only round if decimal
+                {
+                    result = result.toFixed(11);
+                }
+                   
                 console.log(`num1: ${num1}, num2: ${num2}, operator: ${operater}, = ` + result);
+
                 output.textContent = result;
             }
             else
@@ -148,7 +189,7 @@ calc.addEventListener('click', (e) =>
     }
 });
 
-console.log("poo " + operate('+', 1, 2));
+// console.log("poo " + operate('+', 1, 2));
 
 
 
