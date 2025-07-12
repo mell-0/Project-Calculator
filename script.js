@@ -47,10 +47,6 @@ function operate(operator, a, b)
 let output = document.querySelector('.output');
 
 
-let numbers = '0123456789.'; // used to check if input is a number or decimal
-let operaters = '+-*/' ; // used to check if input is an operator
-
-
 // used to store the values for the operator function
 let num1 = 0;
 let num2 = 0;
