@@ -55,6 +55,8 @@ let num1 = 0;
 let num2 = 0;
 let operater;
 
+let digits = 0; // used to count # of digits in a num, only allow 14 digits
+
 
 // trying to make buttons onClick
 let numBtn = document.querySelectorAll('.num');
@@ -62,7 +64,19 @@ numBtn.forEach((button) =>
 {
     button.addEventListener('click', () => 
     {
-        output.textContent = button.textContent;
+        if (++digits < 14) // only allow 14 digit numbers
+        {
+            let btnNum = button.textContent;
+
+            if (output.textContent === '0')
+            {
+                output.textContent = btnNum;
+            }
+            else
+            {    
+                output.textContent += btnNum;
+            }
+        }
         console.log(button.textContent + ' is a number');
     });
     
@@ -76,7 +90,7 @@ operaterBtn.forEach((button) =>
     button.addEventListener('click', () => 
     {
         output.textContent = button.textContent;
-        console.log(button.textContent + ' is an operator')
+        console.log(button.textContent + ' is an operator');
     });
 });
 
@@ -88,8 +102,23 @@ otherBtn.forEach((button) =>
     button.addEventListener('click', () => 
     {
         output.textContent = button.textContent;
-        console.log(button.textContent + ' is an misc')
+        console.log(button.textContent + ' is an misc');
     });
+});
+
+
+// getting decimal button
+let decimalBtn = document.querySelector('.decimal');
+
+decimalBtn.addEventListener('click', () =>
+{
+    console.log("this is a deciaml");
+    
+    if (!output.textContent.includes(".")) // only adds decimal when it doesn't have one
+    {
+        output.textContent += '.';
+        digits++;
+    }
 });
 
 
