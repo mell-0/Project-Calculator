@@ -28,7 +28,6 @@ function operate(operator, a, b)
     switch (operator)
     {
         case '+':
-            console.log('hi from +');
         return add(a, b);
 
         case '-':
@@ -42,18 +41,60 @@ function operate(operator, a, b)
     }
 };
 
-
 // making the output screen interactable
 let output = document.querySelector('.output');
 
 
 // used to store the values for the operator function
-let num1 = 0;
-let num2 = 0;
+let num1 = undefined;
+let num2 = undefined;
 let operater = undefined;
 let answer = undefined;
 
-let digits = 0; // used to count # of digits in a num, only allow 14 digits
+let hasOperator = false;
+
+let digits = 0; // used to count # of digits in a num, only allow 13 digits
+
+
+// reset values 
+function reset()
+{
+    num1 = undefined;
+    num2 = undefined;
+    operater = undefined;
+    answer = undefined;
+    hasOperator = false;
+    digits = 0;
+}
+
+
+// checks if you have all info to do operation: num1 & 2 & operator
+function canOperate()
+{
+    return (num1 !== undefined && num2 !== undefined && operater !== undefined);
+}
+
+
+// returns answer
+function getAnswer(operater, num1, num2)
+{
+    return parseFloat(operate(operater, Number(num1), Number(num2)).toFixed(3))
+}
+
+
+// displays answer
+function displayAnswer(answer)
+{
+    // round to 3rd place if answer len is more than 13
+    if (String(answer).length > 13)
+    {
+        output.textContent = Number.parseFloat(answer).toExponential(3); // rounds to the 3rd place
+    }
+    else
+    {   // if answer length is less than or equal to 13
+        output.textContent = answer; 
+    }
+}
 
 
 // trying to make buttons onClick
@@ -62,11 +103,11 @@ numBtn.forEach((button) =>
 {
     button.addEventListener('click', () => 
     {
-        if (++digits < 14) // only allow 14 digit numbers
+        if (++digits < 14) // only allow 13 digit numbers
         {
             let btnNum = button.textContent;
 
-            if (output.textContent === '0')
+            if (output.textContent === '0' || operater)
             {
                 output.textContent = btnNum;
             }
@@ -81,7 +122,10 @@ numBtn.forEach((button) =>
         if (operater === undefined)
             num1 = output.textContent;
         else
-            num2 = output.textContent;
+        {
+            num2 = output.textContent; // store num 2 when operator was clicked on
+        }
+            
     });
 });
 
@@ -113,9 +157,22 @@ operaterBtn.forEach((button) =>
     button.addEventListener('click', () => 
     {
         operater = button.textContent; // store the operator
-        output.textContent = ''; // clear output when an operator is clicked on
         digits = 0;
 
+        if (!hasOperator)
+        {
+            output.textContent = ''; // clear output when an operator is clicked on
+            hasOperator = true;
+        }
+        else
+        {
+            console.log("hehe");
+
+            num1 = getAnswer(operater, num1, num2);
+
+            displayAnswer(num1);
+        }
+        
         console.log(button.textContent + ' is an operator');
     });
 });
@@ -125,21 +182,20 @@ operaterBtn.forEach((button) =>
 let equalBtn = document.querySelector('.equal');
 equalBtn.addEventListener('click', (e) => 
 {
-    console.log(e.target.textContent + " was clicked");
-    console.log(`${num1} ${operater} ${num2} = ${operate(operater, Number(num1), Number(num2))}`);
-    
-    answer = parseFloat(operate(operater, Number(num1), Number(num2)).toFixed(3));
-
-    // round to 3rd place if answer len is more than 13
-    if (String(answer).length > 13)
+    // only do operator if it's defined
+    if (canOperate())
     {
-        output.textContent = Number.parseFloat(answer).toExponential(3); // rounds to the 3rd place
+        console.log(e.target.textContent + " was clicked");
+        console.log(`${num1} ${operater} ${num2} = ${operate(operater, Number(num1), Number(num2))}`);
+        
+        answer = getAnswer(operater, num1, num2);
+
+        displayAnswer(answer);
+
+        reset();
     }
-    else
-    {   // if answer length is less than or equal to 13
-        output.textContent = answer; 
-    }
-    
+    else    
+        console.log('no operator');
 });
 
 
@@ -154,6 +210,18 @@ otherBtn.forEach((button) =>
         console.log(button.textContent + ' is an misc');
     });
 });
+
+
+// clear button
+let clearBtn = document.querySelector('.Clear');
+clearBtn.addEventListener('click', () => 
+{
+    reset();
+    output.textContent = '0';
+});
+
+
+
 
 
 
