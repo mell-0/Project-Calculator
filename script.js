@@ -233,6 +233,36 @@ clearBtn.addEventListener('click', () =>
 });
 
 
+// del button, deletes one number
+let delBtn = document.querySelector('.del')
+delBtn.addEventListener('click', () =>
+{
+    console.log('delete button clicked');
+
+    let outputScreen = output.textContent;
+    if (outputScreen !== '0' && outputScreen !== '')
+    {
+        let newNum = outputScreen.substr(0, outputScreen.length-1);
+        output.textContent = newNum;
+
+        if (num2 === undefined)
+        {
+            num1 = newNum;
+            console.log('herer 1');
+        }
+        else
+        {
+            num2 = newNum;
+            console.log('herer 2');
+        }
+            
+    }
+        
+    if (output.textContent === '')
+        output.textContent = '0';
+});
+
+
 
 
 
