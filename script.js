@@ -107,7 +107,7 @@ numBtn.forEach((button) =>
         {
             let btnNum = button.textContent;
 
-            if (output.textContent === '0' || hasOperator)
+            if (output.textContent === '0' || (hasOperator && num2 === undefined)) // 2nd or part only replaces the num2 if it's empty
             {
                 output.textContent = btnNum;
             }
