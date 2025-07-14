@@ -60,7 +60,7 @@ let digits = 0; // used to count # of digits in a num, only allow 13 digits
 
 
 // reset values 
-function reset()
+function reset() 
 {
     // num1 = undefined;
     num2 = undefined;
@@ -110,9 +110,11 @@ numBtn.forEach((button) =>
         {
             let btnNum = button.textContent;
 
-            if (output.textContent === '0' || (hasOperator && num2 === undefined)) // 2nd or part only replaces the num2 if it's empty
+            // 2nd or part only replaces the num2 if it's empty
+            if (output.textContent === '0' || (hasOperator && num2 === undefined))
             {
                 output.textContent = btnNum;
+                hasOperator = false; // this is used to get new input after equals button has been clicked
             }
             else
             {    
@@ -202,6 +204,7 @@ equalBtn.addEventListener('click', (e) =>
         num1 = answer; // storing answer to num1 so it can be used later
 
         reset();
+        hasOperator = true; // keeping this so that I can enter a new number after equal has been clicked
     }
     else    
         console.log('no operator');
