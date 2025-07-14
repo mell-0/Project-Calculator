@@ -211,19 +211,6 @@ equalBtn.addEventListener('click', (e) =>
 });
 
 
-
-// trying to make other btns onClick
-let otherBtn = document.querySelectorAll('.otherBtn');
-otherBtn.forEach((button) => 
-{
-    button.addEventListener('click', () => 
-    {
-        output.textContent = button.textContent;
-        console.log(button.textContent + ' is an misc');
-    });
-});
-
-
 // clear button
 let clearBtn = document.querySelector('.Clear');
 clearBtn.addEventListener('click', () => 
@@ -255,7 +242,6 @@ delBtn.addEventListener('click', () =>
             num2 = newNum;
             console.log('herer 2');
         }
-            
     }
         
     if (output.textContent === '')
@@ -263,6 +249,26 @@ delBtn.addEventListener('click', () =>
 });
 
 
+// negate button
+let negateBtn = document.querySelector('.otherBtn');
+negateBtn.addEventListener('click', () =>
+{
+    console.log('negate button clicked');
+
+    let negatedNum = -Number(output.textContent);
+    output.textContent = negatedNum;
+
+    if (num2 === undefined)
+    {
+        num1 = negatedNum;
+        console.log('negate 1');
+    }
+    else
+    {
+        num2 = negatedNum;
+        console.log('negate 2');
+    }
+});
 
 
 
