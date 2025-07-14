@@ -59,7 +59,7 @@ let digits = 0; // used to count # of digits in a num, only allow 13 digits
 // reset values 
 function reset()
 {
-    num1 = undefined;
+    // num1 = undefined;
     num2 = undefined;
     operater = undefined;
     answer = undefined;
@@ -107,7 +107,7 @@ numBtn.forEach((button) =>
         {
             let btnNum = button.textContent;
 
-            if (output.textContent === '0' || operater)
+            if (output.textContent === '0' || hasOperator)
             {
                 output.textContent = btnNum;
             }
@@ -156,23 +156,27 @@ operaterBtn.forEach((button) =>
 {
     button.addEventListener('click', () => 
     {
-        operater = button.textContent; // store the operator
-        digits = 0;
-
-        if (!hasOperator)
+        if (num1 !== undefined && num2 !== undefined && operater !== undefined)
         {
-            output.textContent = ''; // clear output when an operator is clicked on
-            hasOperator = true;
-        }
+            console.log(`${num1} ${operater} ${num2} = ${operate(operater, Number(num1), Number(num2))}`);
+
+            answer = getAnswer(operater, num1, num2);
+
+            displayAnswer(answer);
+
+            num1 = answer;
+            num2 = undefined;
+
+            operater = button.textContent; // keeping the operator for the next operation
+            hasOperator = true; // used for getting the 2nd input after chaining operators
+        } 
         else
         {
-            console.log("hehe");
-
-            num1 = getAnswer(operater, num1, num2);
-
-            displayAnswer(num1);
+            operater = button.textContent; // store the operator
+            digits = 0;
+            output.textContent = ''; // clear output when an operator is clicked on
         }
-        
+
         console.log(button.textContent + ' is an operator');
     });
 });
@@ -191,6 +195,8 @@ equalBtn.addEventListener('click', (e) =>
         answer = getAnswer(operater, num1, num2);
 
         displayAnswer(answer);
+
+        num1 = answer; // storing answer to num1 so it can be used later
 
         reset();
     }
